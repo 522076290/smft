@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserProductionLineMapper">
+
+    <select id="selectUserProductionLineList"  resultType="userproductionline">
+      select * from UserProductionLine
+    </select>
+
+
+    <select id="selectUserProductionLineById" resultType="userproductionline">
+        SELECT *
+        FROM UserProductionLine
+        WHERE
+        id=#{id}
+    </select>
+
+    <select id="selectUserProductionLineByPosition" resultType="userproductionline">
+        SELECT *
+        FROM UserProductionLine
+        WHERE
+        position=#{position}
+    </select>
+
+    <select id="selectUserProductionLineByLineId" resultType="userproductionline">
+        SELECT *
+        FROM UserProductionLine
+        WHERE
+        productionLineId=#{productionLineId}
+    </select>
+
+
+    <select id="selectUserProductionLineByParameter"
+            resultType="userproductionline">
+        SELECT * FROM UserProductionLine WHERE
+        <choose>
+            <when test="userWorkId != null">
+                userWorkId = #{userWorkId}
+            </when>
+            <when test="stageId != null ">
+                stageId = #{stageId}
+            </when>
+            <when test="productionLineId != null ">
+                productionLineId = #{productionLineId}
+            </when>
+            <when test="type != null ">
+                type = #{type}
+            </when>
+            <when test="position != null ">
+                position = #{position}
+            </when>
+            <when test="isAI != null ">
+                isAI = #{isAI}
+            </when>
+        </choose>
+    </select>
+
+
+
+    <insert id="createUserProductionLine" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="userproductionline">
+        INSERT INTO
+        UserProductionLine(userWorkId,stageId,productionLineId,type,position,isAI)
+        VALUES
+        (#{userWorkId},#{stageId},#{productionLineId},#{type},#{position},#{isAI})
+    </insert>
+
+
+    <update id="updateUserProductionLine" parameterType="userproductionline">
+        update UserProductionLine
+        <set>
+            <if test="userWorkId != null">userWorkId=#{userWorkId},</if>
+            <if test="stageId != null">stageId=#{stageId},</if>
+            <if test="productionLineId != null">productionLineId=#{productionLineId},</if>
+            <if test="type != null">type=#{type},</if>
+            <if test="position != null">position=#{position},</if>
+            <if test="isAI != null">isAI=#{isAI},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <delete id="deletUserProductionLine">
+        DELETE FROM
+        UserProductionLine
+        where
+        id=#{id}
+    </delete>
+
+</mapper>

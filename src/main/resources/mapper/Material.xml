@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.MaterialMapper">
+<!--    获取原材料详情-->
+    <select id="selectMaterialList"  resultType="Material">
+      select a.partId,c.partName,b.content,c.area,c.icon,a.suppierId,a.gold,a.num,
+      a.costTime,b.suppierName,a.id from suppierlist a,suppier b,
+      part c where a.suppierId = b.id and a.partId = c.id
+    </select>
+<!--获取供货商品列表-->
+    <select id="selectSupplyListTEditer"  resultType="SupplyListTEditer">
+     SELECT
+    suppierlist.id,
+    suppierlist.suppierId,
+    suppierlist.partId,
+    suppierlist.gold,
+    suppierlist.num,
+    suppierlist.costTime,
+    suppier.suppierName,
+    part.partName
+    FROM
+    suppierlist ,
+    suppier ,
+    part
+    WHERE
+    suppierlist.suppierId = suppier.id AND
+    suppierlist.partId = part.id
+
+    </select>
+<!--    查询售出记录-->
+    <select id="selectUserSellInfoTEditer"  resultType="UserSellInfoTEditer">
+    SELECT
+    userselloutlog.id,
+    userselloutlog.userWorkId,
+    userselloutlog.carId,
+    userselloutlog.gold,
+    userselloutlog.time,
+    userselloutlog.num,
+    car.carName
+    FROM
+    userselloutlog ,
+    car
+    WHERE
+    userselloutlog.carId = car.id
+
+
+    </select>
+    <!--    查询原材料入库日志-->
+    <select id="selectUserMaterialLog"  resultType="UserMaterialLog">
+    SELECT
+    userpartlog.id,
+    userpartlog.userWorkId,
+    userpartlog.suppierListId,
+    userpartlog.num,
+    userpartlog.time,
+    userpartlog.gold,
+    suppier.suppierName,
+    part.partName
+    FROM
+    userpartlog ,
+    suppier ,
+    part ,
+    suppierlist
+    WHERE
+    userpartlog.suppierListId = suppierlist.id AND
+    suppierlist.suppierId = suppier.id AND
+    suppierlist.partId = part.id
+
+
+
+    </select>
+</mapper>

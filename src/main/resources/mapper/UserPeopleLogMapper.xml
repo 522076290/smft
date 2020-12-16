@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserPeopleLogMapper">
+
+	<resultMap id="BaseResultMap" type="UserPeopleLog">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="id" jdbcType="INTEGER" property="id"/>
+		<result column="userWorkId" jdbcType="INTEGER" property="userWorkId"/>
+		<result column="userPeopleId" jdbcType="INTEGER" property="userPeopleId"/>
+		<result column="time" jdbcType="INTEGER" property="time"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+        		id,
+		userWorkId,
+		userPeopleId,
+		time
+    </sql> 
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from UserPeopleLog
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete
+        from UserPeopleLog
+        where id = #{id}
+    </delete>
+
+    <delete id="delete" parameterType="UserPeopleLog">
+        delete from UserPeopleLog
+        where 1 = 1
+        
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="userWorkId != null">
+             userWorkId = #{userWorkId},
+        </if>
+
+        <if test="userPeopleId != null">
+             userPeopleId = #{userPeopleId},
+        </if>
+
+        <if test="time != null">
+             time = #{time},
+        </if>
+
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id"  parameterType="UserPeopleLog">
+        insert into UserPeopleLog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            
+        <if test = "id != null" >
+        	id,
+        </if>
+
+        <if test = "userWorkId != null" >
+        	userWorkId,
+        </if>
+
+        <if test = "userPeopleId != null" >
+        	userPeopleId,
+        </if>
+
+        <if test = "time != null" >
+        	time,
+        </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            
+        <if test="id != null">
+            #{id},
+        </if>
+
+        <if test="userWorkId != null">
+            #{userWorkId},
+        </if>
+
+        <if test="userPeopleId != null">
+            #{userPeopleId},
+        </if>
+
+        <if test="time != null">
+            #{time},
+        </if>
+
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="UserPeopleLog">
+        update UserPeopleLog
+        <set>
+            
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="userWorkId != null">
+             userWorkId = #{userWorkId},
+        </if>
+
+        <if test="userPeopleId != null">
+             userPeopleId = #{userPeopleId},
+        </if>
+
+        <if test="time != null">
+             time = #{time},
+        </if>
+
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectList" parameterType="UserPeopleLog" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+                from UserPeopleLog
+        where 1 = 1
+        
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="userWorkId != null">
+             userWorkId = #{userWorkId},
+        </if>
+
+        <if test="userPeopleId != null">
+             userPeopleId = #{userPeopleId},
+        </if>
+
+        <if test="time != null">
+             time = #{time},
+        </if>
+
+        order by id desc
+    </select>
+
+    <select id="selectByPartment" parameterType="UserPeopleLog" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+                from UserPeopleLog
+        where 1 = 1
+        <choose>
+        
+        <when test="id != null">
+            and id = #{id}
+        </when>
+
+        <when test="userWorkId != null">
+            and userWorkId = #{userWorkId}
+        </when>
+
+        <when test="userPeopleId != null">
+            and userPeopleId = #{userPeopleId}
+        </when>
+
+        <when test="time != null">
+            and time = #{time}
+        </when>
+
+        </choose>
+        order by id desc
+    </select>
+</mapper>

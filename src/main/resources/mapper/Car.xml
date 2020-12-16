@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.CarMapper">
+
+    <select id="selectCarList"  resultType="car">
+      select id,carName,content from Car
+    </select>
+    <select id="selectCarById" resultType="car">
+        SELECT id,carName,content
+        FROM Car
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectCarByParameter"
+            resultType="car">
+        SELECT id,carName,content FROM Car WHERE
+        <choose>
+            <when test="content != null">
+                 content = #{content}
+            </when>
+            <when test="carName != null ">
+                 carName = #{carName}
+            </when>
+
+        </choose>
+    </select>
+
+
+</mapper>

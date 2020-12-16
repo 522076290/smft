@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.InformationMapper">
+
+	<resultMap id="BaseResultMap" type="Information">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="id" jdbcType="INTEGER" property="id"/>
+		<result column="informationName" jdbcType="INTEGER" property="informationName"/>
+		<result column="time" jdbcType="INTEGER" property="time"/>
+		<result column="words" jdbcType="INTEGER" property="words"/>
+		<result column="video" jdbcType="INTEGER" property="video"/>
+		<result column="icon" jdbcType="INTEGER" property="icon"/>
+		<result column="status" jdbcType="INTEGER" property="status"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+        		id,
+		informationName,
+		time,
+		words,
+		video,
+		icon,
+		status
+    </sql> 
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from Information
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete
+        from Information
+        where id = #{id}
+    </delete>
+
+    <delete id="delete" parameterType="Information">
+        delete from Information
+        where 1 = 1
+        
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="informationName != null">
+             informationName = #{informationName},
+        </if>
+
+        <if test="time != null">
+             time = #{time},
+        </if>
+
+        <if test="words != null">
+             words = #{words},
+        </if>
+
+        <if test="video != null">
+             video = #{video},
+        </if>
+
+        <if test="icon != null">
+             icon = #{icon},
+        </if>
+
+        <if test="status != null">
+             status = #{status},
+        </if>
+
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id"  parameterType="Information">
+        insert into Information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            
+        <if test = "id != null" >
+        	id,
+        </if>
+
+        <if test = "informationName != null" >
+        	informationName,
+        </if>
+
+        <if test = "time != null" >
+        	time,
+        </if>
+
+        <if test = "words != null" >
+        	words,
+        </if>
+
+        <if test = "video != null" >
+        	video,
+        </if>
+
+        <if test = "icon != null" >
+        	icon,
+        </if>
+
+        <if test = "status != null" >
+        	status,
+        </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            
+        <if test="id != null">
+            #{id},
+        </if>
+
+        <if test="informationName != null">
+            #{informationName},
+        </if>
+
+        <if test="time != null">
+            #{time},
+        </if>
+
+        <if test="words != null">
+            #{words},
+        </if>
+
+        <if test="video != null">
+            #{video},
+        </if>
+
+        <if test="icon != null">
+            #{icon},
+        </if>
+
+        <if test="status != null">
+            #{status},
+        </if>
+
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="Information">
+        update Information
+        <set>
+            
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="informationName != null">
+             informationName = #{informationName},
+        </if>
+
+        <if test="time != null">
+             time = #{time},
+        </if>
+
+        <if test="words != null">
+             words = #{words},
+        </if>
+
+        <if test="video != null">
+             video = #{video},
+        </if>
+
+        <if test="icon != null">
+             icon = #{icon},
+        </if>
+
+        <if test="status != null">
+             status = #{status},
+        </if>
+
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectList" parameterType="Information" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+                from Information
+        where 1 = 1
+        
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="informationName != null">
+             informationName = #{informationName},
+        </if>
+
+        <if test="time != null">
+             time = #{time},
+        </if>
+
+        <if test="words != null">
+             words = #{words},
+        </if>
+
+        <if test="video != null">
+             video = #{video},
+        </if>
+
+        <if test="icon != null">
+             icon = #{icon},
+        </if>
+
+        <if test="status != null">
+             status = #{status},
+        </if>
+
+        order by id desc
+    </select>
+
+    <select id="selectByPartment" parameterType="Information" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+                from Information
+        where 1 = 1
+        <choose>
+        
+        <when test="id != null">
+            and id = #{id}
+        </when>
+
+        <when test="informationName != null">
+            and informationName = #{informationName}
+        </when>
+
+        <when test="time != null">
+            and time = #{time}
+        </when>
+
+        <when test="words != null">
+            and words = #{words}
+        </when>
+
+        <when test="video != null">
+            and video = #{video}
+        </when>
+
+        <when test="icon != null">
+            and icon = #{icon}
+        </when>
+
+        <when test="status != null">
+            and status = #{status}
+        </when>
+
+        </choose>
+        order by id desc
+    </select>
+</mapper>

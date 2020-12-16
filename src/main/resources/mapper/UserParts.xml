@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserPartsMapper">
+
+    <select id="selectUserPartsList"  resultType="userparts">
+      select * from UserParts
+    </select>
+
+
+    <select id="selectUserPartsById" resultType="userparts">
+        SELECT *
+        FROM UserParts
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectUserPartsByParameter"
+            resultType="userparts">
+        SELECT * FROM UserParts WHERE
+        <choose>
+            <when test="userWorkId != null">
+                userWorkId = #{userWorkId}
+            </when>
+            <when test="userProductionLineId != null ">
+                userProductionLineId = #{userProductionLineId}
+            </when>
+            <when test="partId != null ">
+                partId = #{partId}
+            </when>
+            <when test="num != null ">
+                num = #{num}
+            </when>
+        </choose>
+    </select>
+
+
+
+    <insert id="createUserParts" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="userparts">
+        INSERT INTO
+        UserParts(userWorkId,userProductionLineId,partId,num)
+        VALUES
+        (#{userWorkId},#{userProductionLineId},#{partId},#{num})
+    </insert>
+
+
+    <update id="updateUserParts" parameterType="userparts">
+        update UserParts
+        <set>
+            <if test="userWorkId != null">userWorkId=#{userWorkId},</if>
+            <if test="userProductionLineId != null">userProductionLineId=#{userProductionLineId},</if>
+            <if test="partId != null">partId=#{partId},</if>
+            <if test="num != null">num=#{num},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <delete id="deletUserParts">
+        DELETE FROM
+        UserParts
+        where
+        id=#{id}
+    </delete>
+
+</mapper>

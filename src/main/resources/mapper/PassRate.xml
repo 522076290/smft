@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.PassRateMapper">
+
+    <select id="selectPassRateList"  resultType="passrate">
+      select * from PassRate
+    </select>
+
+
+    <select id="selectPassRateById" resultType="passrate">
+        SELECT *
+        FROM PassRate
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectPassRateByParameter"
+            resultType="passrate">
+        SELECT * FROM PassRate WHERE
+        <choose>
+            <when test="passRateName != null">
+                passRateName = #{passRateName}
+            </when>
+            <when test="carId != null ">
+                carId = #{carId}
+            </when>
+            <when test="rate != null ">
+                rate = #{rate}
+            </when>
+            <when test="content != null ">
+                content = #{content}
+            </when>
+            <when test="costTime != null ">
+                costTime = #{costTime}
+            </when>
+
+        </choose>
+    </select>
+
+
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserInPriceLogMapper">
+
+    <select id="selectUserInPriceLogList"  resultType="userinpriceLog">
+      select * from UserInPriceLog
+    </select>
+
+
+    <select id="selectUserInPriceLogById" resultType="userinpriceLog">
+        SELECT *
+        FROM UserInPriceLog
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectUserInPriceLogByParameter"
+            resultType="userinpriceLog">
+        SELECT * FROM UserInPriceLog WHERE
+        <choose>
+            <when test="userWorkId != null">
+                userWorkId = #{userWorkId}
+            </when>
+            <when test="price != null ">
+                price = #{price}
+            </when>
+            <when test="endPrice != null ">
+                endPrice = #{endPrice}
+            </when>
+            <when test="time != null ">
+                time = #{time}
+            </when>
+            <when test="type != null ">
+                type = #{type}
+            </when>
+        </choose>
+    </select>
+
+
+
+    <insert id="createUserInPriceLog" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="userinpriceLog">
+        INSERT INTO
+        UserInPriceLog(userWorkId,price,endPrice,time,type)
+        VALUES
+        (#{userWorkId},#{price},#{endPrice},#{time},#{type})
+    </insert>
+
+
+    <update id="updateUserInPriceLog" parameterType="userinpriceLog">
+        update UserInPriceLog
+        <set>
+            <if test="userWorkId != null">userWorkId=#{userWorkId},</if>
+            <if test="price != null">price=#{price},</if>
+            <if test="endPrice != null">endPrice=#{endPrice},</if>
+            <if test="time != null">time=#{time},</if>
+            <if test="type != null">type=#{type},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <delete id="deletUserInPriceLog">
+        DELETE FROM
+        UserInPriceLog
+        where
+        id=#{id}
+    </delete>
+
+</mapper>

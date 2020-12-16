@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserWorkInfoMapper">
+
+    <select id="selectUserWorkInfoList"  resultType="userworkinfo">
+      select id,partCapacity,carCapacity,price from UserWork
+    </select>
+
+
+    <select id="selectUserWorkInfoById" resultType="userworkinfo">
+        SELECT id,partCapacity,carCapacity,price
+        FROM UserWork
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectUserWorkInfoByParameter"
+            resultType="userworkinfo">
+        SELECT id,partCapacity,carCapacity,price FROM UserWork WHERE
+        <choose>
+            <when test="partCapacity != null">
+                partCapacity = #{partCapacity}
+            </when>
+            <when test="carCapacity != null ">
+                carCapacity = #{carCapacity}
+            </when>
+            <when test="price != null ">
+                price = #{price}
+            </when>
+
+        </choose>
+    </select>
+
+    <update id="updateUserWorkInfo" parameterType="userworkinfo">
+        update UserWork
+        <set>
+            <if test="partCapacity != null">partCapacity=#{partCapacity},</if>
+            <if test="carCapacity != null">carCapacity=#{carCapacity},</if>
+            <if test="price != null">price=#{price}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+</mapper>

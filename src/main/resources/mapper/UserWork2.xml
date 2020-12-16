@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserWork2Mapper">
+
+    <select id="selectUserWorkList"  resultType="userwork2">
+      SELECT
+        userwork.id,
+        userwork.loginName,
+        userwork.nickName,
+        userwork.partCapacity,
+        userwork.carCapacity,
+        userwork.price,
+        userworkenvironmental.`day`,
+        userworkenvironmental.lightSwitch,
+        userworkenvironmental.acOnOff,
+        userworkenvironmental.beam,
+        userworkenvironmental.workshopTemp,
+        userworkenvironmental.outTemp,
+        userworkenvironmental.power,
+        userworkenvironmental.powerConsume,
+        userworkenvironmental.time
+        FROM userwork,userworkenvironmental WHERE userwork.id = userworkenvironmental.id
+    </select>
+
+
+    <select id="selectUserWorkById" resultType="userwork2">
+        SELECT
+        userwork.id,
+        userwork.loginName,
+        userwork.nickName,
+        userwork.partCapacity,
+        userwork.carCapacity,
+        userwork.price,
+        userworkenvironmental.`day`,
+        userworkenvironmental.lightSwitch,
+        userworkenvironmental.acOnOff,
+        userworkenvironmental.beam,
+        userworkenvironmental.workshopTemp,
+        userworkenvironmental.outTemp,
+        userworkenvironmental.power,
+        userworkenvironmental.powerConsume,
+        userworkenvironmental.time
+        FROM userwork,userworkenvironmental WHERE userwork.id = userworkenvironmental.id and userwork.id = #{id}
+    </select>
+</mapper>

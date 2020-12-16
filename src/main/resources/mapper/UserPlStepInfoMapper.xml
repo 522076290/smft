@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserPlStepInfoMapper">
+
+	<resultMap id="BaseResultMap" type="UserPlStepInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="id" jdbcType="INTEGER" property="id"/>
+		<result column="plStepName" jdbcType="VARCHAR" property="plStepName"/>
+		<result column="stageId" jdbcType="INTEGER" property="stageId"/>
+		<result column="costTime" jdbcType="INTEGER" property="costTime"/>
+		<result column="step" jdbcType="INTEGER" property="step"/>
+		<result column="power" jdbcType="INTEGER" property="power"/>
+		<result column="consume" jdbcType="INTEGER" property="consume"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+        		id,
+		plStepName,
+		stageId,
+		costTime,
+		step,
+		power,
+		consume
+    </sql> 
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from UserPlStep
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete
+        from UserPlStep
+        where id = #{id}
+    </delete>
+
+    <delete id="delete" parameterType="UserPlStepInfo">
+        delete from UserPlStep
+        where 1 = 1
+        
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="plStepName != null">
+             plStepName = #{plStepName},
+        </if>
+
+        <if test="stageId != null">
+             stageId = #{stageId},
+        </if>
+
+        <if test="costTime != null">
+             costTime = #{costTime},
+        </if>
+
+        <if test="step != null">
+             step = #{step},
+        </if>
+
+        <if test="power != null">
+             power = #{power},
+        </if>
+
+        <if test="consume != null">
+             consume = #{consume},
+        </if>
+
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id"  parameterType="UserPlStepInfo">
+        insert into UserPlStep
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            
+        <if test = "id != null" >
+        	id,
+        </if>
+
+        <if test = "plStepName != null" >
+        	plStepName,
+        </if>
+
+        <if test = "stageId != null" >
+        	stageId,
+        </if>
+
+        <if test = "costTime != null" >
+        	costTime,
+        </if>
+
+        <if test = "step != null" >
+        	step,
+        </if>
+
+        <if test = "power != null" >
+        	power,
+        </if>
+
+        <if test = "consume != null" >
+        	consume,
+        </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            
+        <if test="id != null">
+            #{id},
+        </if>
+
+        <if test="plStepName != null">
+            #{plStepName},
+        </if>
+
+        <if test="stageId != null">
+            #{stageId},
+        </if>
+
+        <if test="costTime != null">
+            #{costTime},
+        </if>
+
+        <if test="step != null">
+            #{step},
+        </if>
+
+        <if test="power != null">
+            #{power},
+        </if>
+
+        <if test="consume != null">
+            #{consume},
+        </if>
+
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="UserPlStepInfo">
+        update UserPlStep
+        <set>
+            
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="plStepName != null">
+             plStepName = #{plStepName},
+        </if>
+
+        <if test="stageId != null">
+             stageId = #{stageId},
+        </if>
+
+        <if test="costTime != null">
+             costTime = #{costTime},
+        </if>
+
+        <if test="step != null">
+             step = #{step},
+        </if>
+
+        <if test="power != null">
+             power = #{power},
+        </if>
+
+        <if test="consume != null">
+             consume = #{consume},
+        </if>
+
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectList" parameterType="UserPlStepInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+                from UserPlStep
+        where 1 = 1
+        
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="plStepName != null">
+             plStepName = #{plStepName},
+        </if>
+
+        <if test="stageId != null">
+             stageId = #{stageId},
+        </if>
+
+        <if test="costTime != null">
+             costTime = #{costTime},
+        </if>
+
+        <if test="step != null">
+             step = #{step},
+        </if>
+
+        <if test="power != null">
+             power = #{power},
+        </if>
+
+        <if test="consume != null">
+             consume = #{consume},
+        </if>
+
+        order by id desc
+    </select>
+
+    <select id="selectByPartment" parameterType="UserPlStepInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+                from UserPlStep
+        where 1 = 1
+        <choose>
+        
+        <when test="id != null">
+            and id = #{id}
+        </when>
+
+        <when test="plStepName != null">
+            and plStepName = #{plStepName}
+        </when>
+
+        <when test="stageId != null">
+            and stageId = #{stageId}
+        </when>
+
+        <when test="costTime != null">
+            and costTime = #{costTime}
+        </when>
+
+        <when test="step != null">
+            and step = #{step}
+        </when>
+
+        <when test="power != null">
+            and power = #{power}
+        </when>
+
+        <when test="consume != null">
+            and consume = #{consume}
+        </when>
+
+        </choose>
+        order by id desc
+    </select>
+</mapper>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserRepairCarLogMapper">
+
+	<resultMap id="BaseResultMap" type="UserRepairCarLog">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="id" jdbcType="INTEGER" property="id"/>
+		<result column="userWorkId" jdbcType="INTEGER" property="userWorkId"/>
+		<result column="userProductionLineId" jdbcType="INTEGER" property="userProductionLineId"/>
+		<result column="carId" jdbcType="INTEGER" property="carId"/>
+		<result column="time" jdbcType="INTEGER" property="time"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+        		id,
+		userWorkId,
+		userProductionLineId,
+		carId,
+		time
+    </sql> 
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from UserRepairCarLog
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete
+        from UserRepairCarLog
+        where id = #{id}
+    </delete>
+
+    <delete id="delete" parameterType="UserRepairCarLog">
+        delete from UserRepairCarLog
+        where 1 = 1
+        
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="userWorkId != null">
+             userWorkId = #{userWorkId},
+        </if>
+
+        <if test="userProductionLineId != null">
+             userProductionLineId = #{userProductionLineId},
+        </if>
+
+        <if test="carId != null">
+             carId = #{carId},
+        </if>
+
+        <if test="time != null">
+             time = #{time},
+        </if>
+
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id"  parameterType="UserRepairCarLog">
+        insert into UserRepairCarLog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            
+        <if test = "id != null" >
+        	id,
+        </if>
+
+        <if test = "userWorkId != null" >
+        	userWorkId,
+        </if>
+
+        <if test = "userProductionLineId != null" >
+        	userProductionLineId,
+        </if>
+
+        <if test = "carId != null" >
+        	carId,
+        </if>
+
+        <if test = "time != null" >
+        	time,
+        </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            
+        <if test="id != null">
+            #{id},
+        </if>
+
+        <if test="userWorkId != null">
+            #{userWorkId},
+        </if>
+
+        <if test="userProductionLineId != null">
+            #{userProductionLineId},
+        </if>
+
+        <if test="carId != null">
+            #{carId},
+        </if>
+
+        <if test="time != null">
+            #{time},
+        </if>
+
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="UserRepairCarLog">
+        update UserRepairCarLog
+        <set>
+            
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="userWorkId != null">
+             userWorkId = #{userWorkId},
+        </if>
+
+        <if test="userProductionLineId != null">
+             userProductionLineId = #{userProductionLineId},
+        </if>
+
+        <if test="carId != null">
+             carId = #{carId},
+        </if>
+
+        <if test="time != null">
+             time = #{time},
+        </if>
+
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectList" parameterType="UserRepairCarLog" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+                from UserRepairCarLog
+        where 1 = 1
+        
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="userWorkId != null">
+             userWorkId = #{userWorkId},
+        </if>
+
+        <if test="userProductionLineId != null">
+             userProductionLineId = #{userProductionLineId},
+        </if>
+
+        <if test="carId != null">
+             carId = #{carId},
+        </if>
+
+        <if test="time != null">
+             time = #{time},
+        </if>
+        order by id desc
+    </select>
+
+    <select id="selectByPartment" parameterType="UserRepairCarLog" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+                from UserRepairCarLog
+        where 1 = 1
+        <choose>
+        
+        <when test="id != null">
+            and id = #{id}
+        </when>
+
+        <when test="userWorkId != null">
+            and userWorkId = #{userWorkId}
+        </when>
+
+        <when test="userProductionLineId != null">
+            and userProductionLineId = #{userProductionLineId}
+        </when>
+
+        <when test="carId != null">
+            and carId = #{carId}
+        </when>
+
+        <when test="time != null">
+            and time = #{time}
+        </when>
+
+        </choose>
+        order by id desc
+    </select>
+</mapper>

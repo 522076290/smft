@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.ProductionLineMapper">
+
+    <select id="selectProductionLineList"  resultType="productionline">
+      select id,productionLineName,content,carId from ProductionLine
+    </select>
+
+
+    <select id="selectProductionLineById" resultType="productionline">
+        SELECT id,productionLineName,content,carId
+        FROM ProductionLine
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectProductionLineByParameter"
+            resultType="productionline">
+        SELECT id,productionLineName,content,carId FROM ProductionLine WHERE
+        <choose>
+            <when test="productionLineName != null">
+                productionLineName = #{productionLineName}
+            </when>
+            <when test="content != null ">
+                content = #{content}
+            </when>
+            <when test="carId != null ">
+                carId = #{carId}
+            </when>
+        </choose>
+    </select>
+
+
+</mapper>

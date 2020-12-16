@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.SuppierMapper">
+
+    <select id="selectSuppierList"  resultType="suppier">
+      select * from Suppier
+    </select>
+
+
+    <select id="selectSuppierById" resultType="suppier">
+        SELECT *
+        FROM Suppier
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectSuppierByParameter"
+            resultType="suppier">
+        SELECT * FROM Suppier WHERE
+        <choose>
+            <when test="suppierName != null">
+                suppierName = #{suppierName}
+            </when>
+            <when test="content != null ">
+                content = #{content}
+            </when>
+
+        </choose>
+    </select>
+
+
+</mapper>

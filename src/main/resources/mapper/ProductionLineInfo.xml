@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.ProductionLineInfoMapper">
+
+    <select id="selectProductionLineInfoList"  resultType="productionlineinfo">
+      select id,gold,stageId,needEnergyNum,capacity from ProductionLine
+    </select>
+
+
+    <select id="selectProductionLineInfoById" resultType="productionlineinfo">
+        SELECT id,gold,stageId,needEnergyNum,capacity
+        FROM ProductionLine
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectProductionLineInfoByParameter"
+            resultType="productionlineinfo">
+        SELECT id,gold,stageId,needEnergyNum,capacity FROM ProductionLine WHERE
+        <choose>
+            <when test="gold != null">
+                gold = #{gold}
+            </when>
+            <when test="stageId != null ">
+                stageId = #{stageId}
+            </when>
+            <when test="needEnergyNum != null ">
+                needEnergyNum = #{needEnergyNum}
+            </when>
+            <when test="capacity != null ">
+                capacity = #{capacity}
+            </when>
+        </choose>
+    </select>
+
+
+</mapper>

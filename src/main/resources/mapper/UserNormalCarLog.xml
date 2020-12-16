@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserNormalCarLogMapper">
+
+    <select id="selectUserNormalCarLogList"  resultType="usernormalcarlog">
+      select * from UserNormalCarLog
+    </select>
+
+
+    <select id="selectUserNormalCarLogById" resultType="usernormalcarlog">
+        SELECT *
+        FROM UserNormalCarLog
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectUserNormalCarLogByParameter"
+            resultType="usernormalcarlog">
+        SELECT * FROM UserNormalCarLog WHERE
+        <choose>
+            <when test="userWorkId != null">
+                userWorkId = #{userWorkId}
+            </when>
+            <when test="userProductionLineId != null ">
+                userProductionLineId = #{userProductionLineId}
+            </when>
+            <when test="carId != null ">
+                carId = #{carId}
+            </when>
+            <when test="time != null ">
+                time = #{time}
+            </when>
+        </choose>
+    </select>
+
+
+
+    <insert id="createUserNormalCarLog" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="usernormalcarlog">
+        INSERT INTO
+        UserNormalCarLog(userWorkId,userProductionLineId,carId,time)
+        VALUES
+        (#{userWorkId},#{userProductionLineId},#{carId},#{time})
+    </insert>
+
+
+    <update id="updateUserNormalCarLog" parameterType="usernormalcarlog">
+        update UserNormalCarLog
+        <set>
+            <if test="userWorkId != null">userWorkId=#{userWorkId},</if>
+            <if test="userProductionLineId != null">userProductionLineId=#{userProductionLineId},</if>
+            <if test="carId != null">carId=#{carId},</if>
+            <if test="time != null">time=#{time},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <delete id="deletUserNormalCarLog">
+        DELETE FROM
+        UserNormalCarLog
+        where
+        id=#{id}
+    </delete>
+
+</mapper>

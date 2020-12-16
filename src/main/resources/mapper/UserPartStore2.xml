@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserPartStore2Mapper">
+
+    <select id="selectUserPartStore2List"  resultType="UserPartStore2">
+     SELECT
+userpartstore.id,
+userpartstore.userWorkId,
+userpartstore.num,
+productionline.productionLineName,
+part.partName,
+userpartstore.userProductionLineId,
+userpartstore.partId,
+userproductionline.productionLineId
+FROM
+userpartstore ,
+userproductionline ,
+productionline ,
+part
+WHERE
+userpartstore.userProductionLineId = userproductionline.id
+AND
+userproductionline.productionLineId = productionline.id
+AND
+userpartstore.partId = part.id
+
+
+
+    </select>
+
+</mapper>

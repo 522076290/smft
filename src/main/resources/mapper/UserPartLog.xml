@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserPartLogMapper">
+
+    <select id="selectUserPartLogList"  resultType="userpartlog">
+      select * from UserPartLog
+    </select>
+
+
+    <select id="selectUserPartLogById" resultType="userpartlog">
+        SELECT *
+        FROM UserPartLog
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectUserPartLogByParameter"
+            resultType="userpartlog">
+        SELECT * FROM UserPartLog WHERE
+        <choose>
+            <when test="userWorkId != null">
+                userWorkId = #{userWorkId}
+            </when>
+            <when test="suppierListId != null ">
+                suppierListId = #{suppierListId}
+            </when>
+            <when test="num != null ">
+                num = #{num}
+            </when>
+            <when test="time != null ">
+                time = #{time}
+            </when>
+            <when test="gold != null ">
+                gold = #{gold}
+            </when>
+        </choose>
+    </select>
+
+
+
+    <insert id="createUserPartLog" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="userpartlog">
+        INSERT INTO
+        UserPartLog(userWorkId,suppierListId,num,time,gold)
+        VALUES
+        (#{userWorkId},#{suppierListId},#{num},#{time},#{gold})
+    </insert>
+
+
+    <update id="updateUserPartLog" parameterType="userpartlog">
+        update UserPartLog
+        <set>
+            <if test="userWorkId != null">userWorkId=#{userWorkId},</if>
+            <if test="suppierListId != null">suppierListId=#{suppierListId},</if>
+            <if test="num != null">num=#{num},</if>
+            <if test="time != null">time=#{time},</if>
+            <if test="gold != null">gold=#{gold},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <delete id="deletUserPartLog">
+        DELETE FROM
+        UserPartLog
+        where
+        id=#{id}
+    </delete>
+
+</mapper>

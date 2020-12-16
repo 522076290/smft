@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.EquipmentMapper">
+
+    <select id="selectEquipmentList"  resultType="Equipment">
+      select * from equipment
+    </select>
+
+
+    <insert id="createEquipment" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="Equipment">
+        insert into equipment(equipmentName,content,type,price,hp)
+        values
+        (#{equipmentName},#{content},#{type},#{price},#{hp})
+    </insert>
+
+    <delete id="deleteEquipment">
+        delete from equipment where id = #{id}
+    </delete>
+
+    <update id="updateEquipment" parameterType="Equipment">
+        update equipment
+        <set>
+            <if test="equipmentName != null">equipmentName=#{equipmentName},</if>
+            <if test="content != null">content=#{content},</if>
+            <if test="type != null">type=#{type},</if>
+            <if test="price != null">price=#{price},</if>
+            <if test="hp != null">hp=#{hp},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+</mapper>

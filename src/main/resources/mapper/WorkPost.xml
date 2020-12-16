@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.WorkPostMapper">
+
+    <select id="selectWorkPostList"  resultType="workpost">
+        select * from WorkPost
+    </select>
+
+
+    <select id="selectWorkPostById" resultType="workpost">
+        SELECT *
+        FROM WorkPost
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectWorkPostByParameter"
+            resultType="workpost">
+        SELECT * FROM WorkPost WHERE
+        <choose>
+            <when test="workPostName != null">
+                workPostName = #{workPostName}
+            </when>
+            <when test="productionLineInfold != null ">
+                productionLineInfold = #{productionLineInfold}
+            </when>
+            <when test="status != null ">
+                status = #{status}
+            </when>
+            <when test="consume != null ">
+                consume = #{consume}
+            </when>
+
+        </choose>
+    </select>
+
+
+</mapper>

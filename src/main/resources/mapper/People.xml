@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.PeopleMapper">
+
+    <select id="selectPeopleList"  resultType="people">
+      select * from People
+    </select>
+
+
+    <select id="selectPeopleById" resultType="people">
+        SELECT *
+        FROM People
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectPeopleByParameter"
+            resultType="people">
+        SELECT * FROM People WHERE
+        <choose>
+            <when test="peopleName != null">
+                peopleName = #{peopleName}
+            </when>
+            <when test="icon != null ">
+                icon = #{icon}
+            </when>
+            <when test="status != null ">
+                status = #{status}
+            </when>
+            <when test="talentMarketId != null ">
+                talentMarketId = #{talentMarketId}
+            </when>
+            <when test="gold != null ">
+                gold = #{gold}
+            </when>
+            <when test="hp != null ">
+                hp = #{hp}
+            </when>
+            <when test="content != null ">
+                content = #{content}
+            </when>
+
+        </choose>
+    </select>
+
+
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.PLStepMapper">
+
+    <select id="selectPLStepList"  resultType="plstep">
+      select * from PLStep
+    </select>
+
+
+    <select id="selectPLStepById" resultType="plstep">
+        SELECT *
+        FROM PLStep
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectPLStepByParameter"
+            resultType="plstep">
+        SELECT * FROM PLStep WHERE
+        <choose>
+            <when test="plStepName != null">
+                plStepName = #{plStepName}
+            </when>
+            <when test="step != null ">
+                step = #{step}
+            </when>
+            <when test="power != null ">
+                power = #{power}
+            </when>
+            <when test="consume != null ">
+                consume = #{consume}
+            </when>
+            <when test="step != null ">
+                step = #{step}
+            </when>
+
+        </choose>
+    </select>
+
+
+</mapper>

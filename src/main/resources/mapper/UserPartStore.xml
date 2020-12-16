@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserPartStoreMapper">
+
+    <select id="selectUserPartStoreList"  resultType="userpartstore">
+      select * from UserPartStore
+    </select>
+
+
+    <select id="selectUserPartStoreById" resultType="userpartstore">
+        SELECT *
+        FROM UserPartStore
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectUserPartStoreByParameter"
+            resultType="userpartstore">
+        SELECT * FROM UserPartStore WHERE
+        <choose>
+            <when test="userWorkId != null">
+                userWorkId = #{userWorkId}
+            </when>
+            <when test="userProductionLineId != null ">
+                userProductionLineId = #{userProductionLineId}
+            </when>
+            <when test="partId != null ">
+                partId = #{partId}
+            </when>
+            <when test="num != null ">
+                num = #{num}
+            </when>
+        </choose>
+    </select>
+
+
+
+    <insert id="createUserPartStore" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="userpartstore">
+        INSERT INTO
+        UserPartStore(userWorkId,userProductionLineId,partId,num)
+        VALUES
+        (#{userWorkId},#{userProductionLineId},#{partId},#{num})
+    </insert>
+
+
+    <update id="updateUserPartStore" parameterType="userpartstore">
+        update UserPartStore
+        <set>
+            <if test="userWorkId != null">userWorkId=#{userWorkId},</if>
+            <if test="userProductionLineId != null">userProductionLineId=#{userProductionLineId},</if>
+            <if test="partId != null">partId=#{partId},</if>
+            <if test="num != null">num=#{num},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <delete id="deletUserPartStore">
+        DELETE FROM
+        UserPartStore
+        where
+        id=#{id}
+    </delete>
+
+</mapper>

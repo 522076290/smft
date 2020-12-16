@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserWorkEnvironmentalMapper">
+
+
+    <select id="selectUserWorkEnvironmentalList"  resultType="userworkenvironmental">
+        select * from UserWorkEnvironmental
+    </select>
+
+
+    <select id="selectUserWorkEnvironmentalById" resultType="userworkenvironmental">
+        SELECT *
+        FROM UserWorkEnvironmental
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectUserWorkEnvironmentalByParameter"
+            resultType="userworkenvironmental">
+        SELECT * FROM UserWorkEnvironmental WHERE
+        <choose>
+            <when test="day != null ">
+                day = #{day}
+            </when>
+            <when test="lightSwitch != null ">
+                lightSwitch = #{lightSwitch}
+            </when>
+            <when test="acOnOff != null ">
+                acOnOff = #{acOnOff}
+            </when>
+            <when test="beam != null ">
+                beam = #{beam}
+            </when>
+            <when test="workshopTemp != null ">
+                workshopTemp = #{workshopTemp}
+            </when>
+            <when test="outTemp != null ">
+                outTemp = #{outTemp}
+            </when>
+            <when test="power != null ">
+                power = #{power}
+            </when>
+            <when test="powerConsume != null ">
+                powerConsume = #{powerConsume}
+            </when>
+            <when test="time != null ">
+                time = #{time}
+            </when>
+        </choose>
+    </select>
+
+
+    <update id="updateUserWorkEnvironmental" parameterType="userworkenvironmental">
+        update UserWorkEnvironmental
+        <set>
+            <if test="day != null">day=#{day},</if>
+            <if test="lightSwitch != null">lightSwitch=#{lightSwitch},</if>
+            <if test="acOnOff != null">acOnOff=#{acOnOff},</if>
+            <if test="beam != null">beam=#{beam},</if>
+            <if test="workshopTemp != null">workshopTemp=#{workshopTemp},</if>
+            <if test="outTemp != null">outTemp=#{outTemp},</if>
+            <if test="power != null">power=#{power},</if>
+            <if test="powerConsume != null">powerConsume=#{powerConsume},</if>
+            <if test="time != null">time=#{time}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>

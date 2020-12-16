@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserAppointmentMapper">
+
+	<resultMap id="BaseResultMap" type="UserAppointment">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="id" jdbcType="INTEGER" property="id"/>
+		<result column="userWorkId" jdbcType="INTEGER" property="userWorkId"/>
+		<result column="userAppointmentName" jdbcType="INTEGER" property="userAppointmentName"/>
+		<result column="content" jdbcType="INTEGER" property="content"/>
+		<result column="type" jdbcType="INTEGER" property="type"/>
+		<result column="carId" jdbcType="INTEGER" property="carId"/>
+		<result column="time" jdbcType="INTEGER" property="time"/>
+		<result column="num" jdbcType="INTEGER" property="num"/>
+		<result column="gold" jdbcType="INTEGER" property="gold"/>
+		<result column="engine" jdbcType="INTEGER" property="engine"/>
+		<result column="speed" jdbcType="INTEGER" property="speed"/>
+		<result column="wheel" jdbcType="INTEGER" property="wheel"/>
+		<result column="control" jdbcType="INTEGER" property="control"/>
+		<result column="brake" jdbcType="INTEGER" property="brake"/>
+		<result column="hang" jdbcType="INTEGER" property="hang"/>
+		<result column="color" jdbcType="INTEGER" property="color"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+        		id,
+		userWorkId,
+		userAppointmentName,
+		content,
+		type,
+		carId,
+		time,
+		num,
+		gold,
+		engine,
+		speed,
+		wheel,
+		control,
+		brake,
+		hang,
+		color
+    </sql> 
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from UserAppointment
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete
+        from UserAppointment
+        where id = #{id}
+    </delete>
+
+    <delete id="delete" parameterType="UserAppointment">
+        delete from UserAppointment
+        where 1 = 1
+        
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="userWorkId != null">
+             userWorkId = #{userWorkId},
+        </if>
+
+        <if test="userAppointmentName != null">
+             userAppointmentName = #{userAppointmentName},
+        </if>
+
+        <if test="content != null">
+             content = #{content},
+        </if>
+
+        <if test="type != null">
+             type = #{type},
+        </if>
+
+        <if test="carId != null">
+             carId = #{carId},
+        </if>
+
+        <if test="time != null">
+             time = #{time},
+        </if>
+
+        <if test="num != null">
+             num = #{num},
+        </if>
+
+        <if test="gold != null">
+             gold = #{gold},
+        </if>
+
+        <if test="engine != null">
+             engine = #{engine},
+        </if>
+
+        <if test="speed != null">
+             speed = #{speed},
+        </if>
+
+        <if test="wheel != null">
+             wheel = #{wheel},
+        </if>
+
+        <if test="control != null">
+             control = #{control},
+        </if>
+
+        <if test="brake != null">
+             brake = #{brake},
+        </if>
+
+        <if test="hang != null">
+             hang = #{hang},
+        </if>
+
+        <if test="color != null">
+             color = #{color},
+        </if>
+
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id"  parameterType="UserAppointment">
+        insert into UserAppointment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            
+        <if test = "id != null" >
+        	id,
+        </if>
+
+        <if test = "userWorkId != null" >
+        	userWorkId,
+        </if>
+
+        <if test = "userAppointmentName != null" >
+        	userAppointmentName,
+        </if>
+
+        <if test = "content != null" >
+        	content,
+        </if>
+
+        <if test = "type != null" >
+        	type,
+        </if>
+
+        <if test = "carId != null" >
+        	carId,
+        </if>
+
+        <if test = "time != null" >
+        	time,
+        </if>
+
+        <if test = "num != null" >
+        	num,
+        </if>
+
+        <if test = "gold != null" >
+        	gold,
+        </if>
+
+        <if test = "engine != null" >
+        	engine,
+        </if>
+
+        <if test = "speed != null" >
+        	speed,
+        </if>
+
+        <if test = "wheel != null" >
+        	wheel,
+        </if>
+
+        <if test = "control != null" >
+        	control,
+        </if>
+
+        <if test = "brake != null" >
+        	brake,
+        </if>
+
+        <if test = "hang != null" >
+        	hang,
+        </if>
+
+        <if test = "color != null" >
+        	color,
+        </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            
+        <if test="id != null">
+            #{id},
+        </if>
+
+        <if test="userWorkId != null">
+            #{userWorkId},
+        </if>
+
+        <if test="userAppointmentName != null">
+            #{userAppointmentName},
+        </if>
+
+        <if test="content != null">
+            #{content},
+        </if>
+
+        <if test="type != null">
+            #{type},
+        </if>
+
+        <if test="carId != null">
+            #{carId},
+        </if>
+
+        <if test="time != null">
+            #{time},
+        </if>
+
+        <if test="num != null">
+            #{num},
+        </if>
+
+        <if test="gold != null">
+            #{gold},
+        </if>
+
+        <if test="engine != null">
+            #{engine},
+        </if>
+
+        <if test="speed != null">
+            #{speed},
+        </if>
+
+        <if test="wheel != null">
+            #{wheel},
+        </if>
+
+        <if test="control != null">
+            #{control},
+        </if>
+
+        <if test="brake != null">
+            #{brake},
+        </if>
+
+        <if test="hang != null">
+            #{hang},
+        </if>
+
+        <if test="color != null">
+            #{color},
+        </if>
+
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="UserAppointment">
+        update UserAppointment
+        <set>
+            
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="userWorkId != null">
+             userWorkId = #{userWorkId},
+        </if>
+
+        <if test="userAppointmentName != null">
+             userAppointmentName = #{userAppointmentName},
+        </if>
+
+        <if test="content != null">
+             content = #{content},
+        </if>
+
+        <if test="type != null">
+             type = #{type},
+        </if>
+
+        <if test="carId != null">
+             carId = #{carId},
+        </if>
+
+        <if test="time != null">
+             time = #{time},
+        </if>
+
+        <if test="num != null">
+             num = #{num},
+        </if>
+
+        <if test="gold != null">
+             gold = #{gold},
+        </if>
+
+        <if test="engine != null">
+             engine = #{engine},
+        </if>
+
+        <if test="speed != null">
+             speed = #{speed},
+        </if>
+
+        <if test="wheel != null">
+             wheel = #{wheel},
+        </if>
+
+        <if test="control != null">
+             control = #{control},
+        </if>
+
+        <if test="brake != null">
+             brake = #{brake},
+        </if>
+
+        <if test="hang != null">
+             hang = #{hang},
+        </if>
+
+        <if test="color != null">
+             color = #{color},
+        </if>
+
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectList" parameterType="UserAppointment" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+                from UserAppointment
+        where 1 = 1
+        
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="userWorkId != null">
+             userWorkId = #{userWorkId},
+        </if>
+
+        <if test="userAppointmentName != null">
+             userAppointmentName = #{userAppointmentName},
+        </if>
+
+        <if test="content != null">
+             content = #{content},
+        </if>
+
+        <if test="type != null">
+             type = #{type},
+        </if>
+
+        <if test="carId != null">
+             carId = #{carId},
+        </if>
+
+        <if test="time != null">
+             time = #{time},
+        </if>
+
+        <if test="num != null">
+             num = #{num},
+        </if>
+
+        <if test="gold != null">
+             gold = #{gold},
+        </if>
+
+        <if test="engine != null">
+             engine = #{engine},
+        </if>
+
+        <if test="speed != null">
+             speed = #{speed},
+        </if>
+
+        <if test="wheel != null">
+             wheel = #{wheel},
+        </if>
+
+        <if test="control != null">
+             control = #{control},
+        </if>
+
+        <if test="brake != null">
+             brake = #{brake},
+        </if>
+
+        <if test="hang != null">
+             hang = #{hang},
+        </if>
+
+        <if test="color != null">
+             color = #{color},
+        </if>
+
+        order by id desc
+    </select>
+
+    <select id="selectByPartment" parameterType="UserAppointment" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+                from UserAppointment
+        where 1 = 1
+        <choose>
+        
+        <when test="id != null">
+            and id = #{id}
+        </when>
+
+        <when test="userWorkId != null">
+            and userWorkId = #{userWorkId}
+        </when>
+
+        <when test="userAppointmentName != null">
+            and userAppointmentName = #{userAppointmentName}
+        </when>
+
+        <when test="content != null">
+            and content = #{content}
+        </when>
+
+        <when test="type != null">
+            and type = #{type}
+        </when>
+
+        <when test="carId != null">
+            and carId = #{carId}
+        </when>
+
+        <when test="time != null">
+            and time = #{time}
+        </when>
+
+        <when test="num != null">
+            and num = #{num}
+        </when>
+
+        <when test="gold != null">
+            and gold = #{gold}
+        </when>
+
+        <when test="engine != null">
+            and engine = #{engine}
+        </when>
+
+        <when test="speed != null">
+            and speed = #{speed}
+        </when>
+
+        <when test="wheel != null">
+            and wheel = #{wheel}
+        </when>
+
+        <when test="control != null">
+            and control = #{control}
+        </when>
+
+        <when test="brake != null">
+            and brake = #{brake}
+        </when>
+
+        <when test="hang != null">
+            and hang = #{hang}
+        </when>
+
+        <when test="color != null">
+            and color = #{color}
+        </when>
+
+        </choose>
+        order by id desc
+    </select>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.PartMapper">
+
+    <select id="selectPartList"  resultType="part">
+      select * from Part
+    </select>
+
+
+    <select id="selectPartById" resultType="part">
+        SELECT *
+        FROM Part
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectPartByParameter"
+            resultType="part">
+        SELECT * FROM Part WHERE
+        <choose>
+            <when test="partName != null">
+                partName = #{partName}
+            </when>
+            <when test="content != null ">
+                content = #{content}
+            </when>
+            <when test="area != null ">
+                area = #{area}
+            </when>
+            <when test="icon != null ">
+                icon = #{icon}
+            </when>
+
+        </choose>
+    </select>
+
+
+</mapper>

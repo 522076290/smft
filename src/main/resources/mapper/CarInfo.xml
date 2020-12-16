@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.CarInfoMapper">
+
+    <select id="selectCarInfoList"  resultType="carinfo">
+      select id,gold,area,repairGold from Car
+    </select>
+
+
+    <select id="selectCarInfoById" resultType="carinfo">
+        SELECT id,gold,area,repairGold
+        FROM Car
+        WHERE
+        id=#{id}
+    </select>
+
+
+    <select id="selectCarInfoByParameter"
+            resultType="carinfo">
+        SELECT id,gold,area,repairGold FROM Car WHERE
+        <choose>
+            <when test="area != null">
+                area = #{area}
+            </when>
+            <when test="gold != null ">
+                gold = #{gold}
+            </when>
+            <when test="repairGold != null ">
+                repairGold = #{repairGold}
+            </when>
+
+        </choose>
+    </select>
+
+
+</mapper>

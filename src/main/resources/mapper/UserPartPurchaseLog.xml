@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserPartPurchaseLogMapper">
+
+    <select id="selectUserPartPurchaseLogList"  resultType="userpartpurchaselog">
+      select * from UserPartPurchaseLog
+    </select>
+
+
+    <select id="selectUserPartPurchaseLogById" resultType="userpartpurchaselog">
+        SELECT *
+        FROM UserPartPurchaseLog
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectUserPartPurchaseLogByParameter"
+            resultType="userpartpurchaselog">
+        SELECT * FROM UserPartPurchaseLog WHERE
+        <choose>
+            <when test="userWorkId != null">
+                userWorkId = #{userWorkId}
+            </when>
+            <when test="userProductionLineId != null ">
+                userProductionLineId = #{userProductionLineId}
+            </when>
+            <when test="userStageId != null ">
+                userStageId = #{userStageId}
+            </when>
+            <when test="PartId != null ">
+                PartId = #{PartId}
+            </when>
+            <when test="num != null ">
+                num = #{num}
+            </when>
+            <when test="time != null ">
+                time = #{time}
+            </when>
+        </choose>
+    </select>
+
+
+
+    <insert id="createUserPartPurchaseLog" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="userpartpurchaselog">
+        INSERT INTO
+        UserPartPurchaseLog(userWorkId,userProductionLineId,userStageId,PartId,num,time)
+        VALUES
+        (#{userWorkId},#{userProductionLineId},#{userStageId},#{PartId},#{num},#{time})
+    </insert>
+
+
+    <update id="updateUserPartPurchaseLog" parameterType="userpartpurchaselog">
+        update UserPartPurchaseLog
+        <set>
+            <if test="userWorkId != null">userWorkId=#{userWorkId},</if>
+            <if test="userProductionLineId != null">userProductionLineId=#{userProductionLineId},</if>
+            <if test="userStageId != null">userStageId=#{userStageId},</if>
+            <if test="PartId != null">PartId=#{PartId},</if>
+            <if test="num != null">num=#{num},</if>
+            <if test="time != null">time=#{time},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <delete id="deletUserPartPurchaseLog">
+        DELETE FROM
+        UserPartPurchaseLog
+        where
+        id=#{id}
+    </delete>
+
+</mapper>

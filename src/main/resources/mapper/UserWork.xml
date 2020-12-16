@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserWorkMapper">
+
+    <select id="selectUserWorkList"  resultType="userwork">
+      select id,loginName,nickName from UserWork
+    </select>
+
+
+    <select id="selectUserWorkById" resultType="userwork">
+        SELECT id,loginName,nickName
+        FROM UserWork
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectUserWorkByParameter"
+            resultType="userwork">
+        SELECT id,loginName,nickName FROM UserWork WHERE
+        <choose>
+            <when test="loginName != null">
+                loginName = #{loginName}
+            </when>
+            <when test="nickName != null ">
+                nickName = #{nickName}
+            </when>
+
+        </choose>
+    </select>
+
+    <update id="updateUserWork" parameterType="userwork">
+        update UserWork
+        <set>
+            <if test="loginName != null">loginName=#{loginName},</if>
+            <if test="nickName != null">nickName=#{nickName}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>

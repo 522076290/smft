@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserRepairCarStoreMapper">
+
+    <select id="selectUserRepairCarStoreList"  resultType="userrepaircarstore">
+      select * from UserRepairCarStore
+    </select>
+
+
+    <select id="selectUserRepairCarStoreById" resultType="userrepaircarstore">
+        SELECT *
+        FROM UserRepairCarStore
+        WHERE
+        id=#{id}
+    </select>
+
+
+
+    <select id="selectUserRepairCarStoreByParameter"
+            resultType="userrepaircarstore">
+        SELECT * FROM UserRepairCarStore WHERE
+        <choose>
+            <when test="userWorkId != null">
+                userWorkId = #{userWorkId}
+            </when>
+            <when test="userProductionLineId != null ">
+                userProductionLineId = #{userProductionLineId}
+            </when>
+            <when test="carId != null ">
+                carId = #{carId}
+            </when>
+            <when test="num != null ">
+                num = #{num}
+            </when>
+        </choose>
+    </select>
+
+
+
+    <insert id="createUserRepairCarStore" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="userrepaircarstore">
+        INSERT INTO
+        UserRepairCarStore(userWorkId,userProductionLineId,carId,num)
+        VALUES
+        (#{userWorkId},#{userProductionLineId},#{carId},#{num})
+    </insert>
+
+
+    <update id="updateUserRepairCarStore" parameterType="userrepaircarstore">
+        update UserRepairCarStore
+        <set>
+            <if test="userWorkId != null">userWorkId=#{userWorkId},</if>
+            <if test="userProductionLineId != null">userProductionLineId=#{userProductionLineId},</if>
+            <if test="carId != null">carId=#{carId},</if>
+            <if test="num != null">num=#{num},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <delete id="deletUserRepairCarStore">
+        DELETE FROM
+        UserRepairCarStore
+        where
+        id=#{id}
+    </delete>
+
+</mapper>

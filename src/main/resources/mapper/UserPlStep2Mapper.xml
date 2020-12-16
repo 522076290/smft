@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserPlStep2Mapper">
+
+
+    <select id="selectUserPlStep2List"  resultType="UserPlStep2">
+      SELECT
+userplstep.id,
+userplstep.userWorkId,
+userplstep.userProductionLineId,
+userplstep.nextUserPlStepId,
+userplstep.plStepName,
+userplstep.stageId,
+userplstep.costTime,
+userplstep.step,
+userplstep.power,
+userplstep.consume,
+stage.stageName,
+plstep.plStepName AS plStepName1
+FROM
+userplstep ,
+stage ,
+plstep
+WHERE
+userplstep.userProductionLineId = #{userProductionLineId}
+AND
+userplstep.stageId = stage.id
+AND
+(userplstep.nextUserPlStepId = plstep.id or userplstep.nextUserPlStepId = -1)
+
+GROUP BY userplstep.id;
+
+    </select>
+
+
+</mapper>

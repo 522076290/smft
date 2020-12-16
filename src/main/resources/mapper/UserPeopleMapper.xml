@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smfst.xcw.mapper.UserPeopleMapper">
+
+	<resultMap id="BaseResultMap" type="UserPeople">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="id" jdbcType="INTEGER" property="id"/>
+		<result column="userWorkId" jdbcType="INTEGER" property="userWorkId"/>
+		<result column="power" jdbcType="INTEGER" property="power"/>
+		<result column="peopleId" jdbcType="INTEGER" property="peopleId"/>
+		<result column="userProductionLineId" jdbcType="INTEGER" property="userProductionLineId"/>
+		<result column="workPostId" jdbcType="INTEGER" property="workPostId"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+        		id,
+		userWorkId,
+		power,
+		peopleId,
+		userProductionLineId,
+		workPostId
+    </sql> 
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from UserPeople
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete
+        from UserPeople
+        where id = #{id}
+    </delete>
+
+    <delete id="delete" parameterType="UserPeople">
+        delete from UserPeople
+        where 1 = 1
+        
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="userWorkId != null">
+             userWorkId = #{userWorkId},
+        </if>
+
+        <if test="power != null">
+             power = #{power},
+        </if>
+
+        <if test="peopleId != null">
+             peopleId = #{peopleId},
+        </if>
+
+        <if test="userProductionLineId != null">
+             userProductionLineId = #{userProductionLineId},
+        </if>
+
+        <if test="workPostId != null">
+             workPostId = #{workPostId},
+        </if>
+
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id"  parameterType="UserPeople">
+        insert into UserPeople
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            
+        <if test = "id != null" >
+        	id,
+        </if>
+
+        <if test = "userWorkId != null" >
+        	userWorkId,
+        </if>
+
+        <if test = "power != null" >
+        	power,
+        </if>
+
+        <if test = "peopleId != null" >
+        	peopleId,
+        </if>
+
+        <if test = "userProductionLineId != null" >
+        	userProductionLineId,
+        </if>
+
+        <if test = "workPostId != null" >
+        	workPostId,
+        </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            
+        <if test="id != null">
+            #{id},
+        </if>
+
+        <if test="userWorkId != null">
+            #{userWorkId},
+        </if>
+
+        <if test="power != null">
+            #{power},
+        </if>
+
+        <if test="peopleId != null">
+            #{peopleId},
+        </if>
+
+        <if test="userProductionLineId != null">
+            #{userProductionLineId},
+        </if>
+
+        <if test="workPostId != null">
+            #{workPostId},
+        </if>
+
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="UserPeople">
+        update UserPeople
+        <set>
+            
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="userWorkId != null">
+             userWorkId = #{userWorkId},
+        </if>
+
+        <if test="power != null">
+             power = #{power},
+        </if>
+
+        <if test="peopleId != null">
+             peopleId = #{peopleId},
+        </if>
+
+        <if test="userProductionLineId != null">
+             userProductionLineId = #{userProductionLineId},
+        </if>
+
+        <if test="workPostId != null">
+             workPostId = #{workPostId},
+        </if>
+
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectList" parameterType="UserPeople" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+                from UserPeople
+        where 1 = 1
+        
+        <if test="id != null">
+             id = #{id},
+        </if>
+
+        <if test="userWorkId != null">
+             userWorkId = #{userWorkId},
+        </if>
+
+        <if test="power != null">
+             power = #{power},
+        </if>
+
+        <if test="peopleId != null">
+             peopleId = #{peopleId},
+        </if>
+
+        <if test="userProductionLineId != null">
+             userProductionLineId = #{userProductionLineId},
+        </if>
+
+        <if test="workPostId != null">
+             workPostId = #{workPostId},
+        </if>
+
+        order by id desc
+    </select>
+
+    <select id="selectByPartment" parameterType="UserPeople" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+                from UserPeople
+        where 1 = 1
+        <choose>
+        
+        <when test="id != null">
+            and id = #{id}
+        </when>
+
+        <when test="userWorkId != null">
+            and userWorkId = #{userWorkId}
+        </when>
+
+        <when test="power != null">
+            and power = #{power}
+        </when>
+
+        <when test="peopleId != null">
+            and peopleId = #{peopleId}
+        </when>
+
+        <when test="userProductionLineId != null">
+            and userProductionLineId = #{userProductionLineId}
+        </when>
+
+        <when test="workPostId != null">
+            and workPostId = #{workPostId}
+        </when>
+
+        </choose>
+        order by id desc
+    </select>
+</mapper>
